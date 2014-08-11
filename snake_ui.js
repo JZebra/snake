@@ -30,7 +30,7 @@
   
   UI.prototype.gameover = function() {
     this.stop();
-    $('.messages').html("You hit a something and exploded")
+    $('.messages').html("You hit something and exploded into " + this.board.snake.segments.length + " bits")
     if (this.board.score > this.board.highscore) {
       this.board.highscore = this.board.score;
       $('.messages').append(' but at least you got a new high score!')
