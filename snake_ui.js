@@ -10,7 +10,7 @@
   UI.prototype.start = function(highscore) {  
     this.board = new SG.Board(highscore);
     // remove start game listener placed by #gameover
-    $('.messages').html("Use WASD to move!");
+    $('.messages').empty;
     $('body').unbind('keydown');
     // bind keypress listener
     $('body').on('keydown', turnSnake.bind(this));
@@ -30,7 +30,7 @@
   
   UI.prototype.gameover = function() {
     this.stop();
-    $('.messages').html("You hit something and exploded into " + this.board.snake.segments.length + " bits")
+    $('.messages').html("You hit something and exploded into " + this.board.snake.segments.length + " pieces")
     if (this.board.score > this.board.highscore) {
       this.board.highscore = this.board.score;
       $('.messages').append(' but at least you got a new high score!')
