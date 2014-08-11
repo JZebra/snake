@@ -7,9 +7,12 @@
   
   UI.KEYS = { 'w': 87, 'a': 65, 's': 83, 'd': 68 };
   
-  UI.prototype.start = function() {  
-    this.board = new SG.Board();
-    
+  UI.prototype.start = function(highscore) {  
+    this.board = new SG.Board(highscore);
+    // remove start game listener placed by #gameover
+    $('.messages').html("Use WASD to move!");
+    $('body').unbind('keydown');
+    // bind keypress listener
     $('body').on('keydown', turnSnake.bind(this));
     
     this.clock = setInterval(step.bind(this), 60);
@@ -17,11 +20,25 @@
   
   UI.prototype.stop = function() {
     clearInterval(this.clock);
-  }
+  };
   
   UI.prototype.draw = function() {
     this.$el.html(this.board.render());
-    $('h1').html('SNAKE ' + this.board.score);
+    $('.score').html("Score: " + this.board.score);
+    $('.high-score').html('High Score: ' + this.board.highscore)
+  };
+  
+  UI.prototype.gameover = function() {
+    this.stop();
+    $('.messages').html("You hit a something and exploded")
+    if (this.board.score > this.board.highscore) {
+      this.board.highscore = this.board.score;
+      $('.messages').append(' but at least you got a new high score!')
+    }
+    $('.messages').append('<br>' + 'Press any key to play again!')
+    $('body').on('keydown', function() {
+      this.start(this.board.highscore)
+    }.bind(this));
   };
   
   function turnSnake(event) {
@@ -41,9 +58,9 @@
   
   function step() {
     if (this.board.snake.checkCollision()){
-      this.stop();
-      alert("Sucka");
+      this.gameover();
     }
+    
     var snake = this.board.snake;
     
     var tail = snake.segments[snake.segments.length - 1];
@@ -62,10 +79,7 @@
   }
   
   
-  
 })(this);
-
-
 
 $(document).ready(function() {
   window.game = new SG.UI($('#snake'));

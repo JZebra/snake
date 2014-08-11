@@ -2,5 +2,11 @@ pre {
   border: 2px solid black;
   letter-spacing: 4px;
   background-color: #2ecc71;
-
+  display: inline-block;
 }
+
+.game-container {
+  text-align: center;
+}
+
+

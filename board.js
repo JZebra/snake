@@ -1,12 +1,13 @@
 (function(root){
   var SG = root.SG = (root.SG || {} )
   
-  var Board = SG.Board = function(){
+  var Board = SG.Board = function(highscore){
     this.snake = new SG.Snake();
     this.apple;
     this.grid = createGrid();
     this.placeApple();
     this.score = 0;
+    this.highscore = highscore || 0;
   };
   
   function createGrid() {
@@ -59,7 +60,6 @@
         if (this.grid[x][y] === '.') {
           this.grid[x][y] = 'O';
           this.apple = [x, y];
-          console.log(this.apple);
           placedApple = true;
         }
       }

@@ -2,7 +2,7 @@
   <head>
     <title>Snake!</title>
     <link rel="stylesheet" type="text/css" href="snake.css">
-    <link href="favicon.png" rel="icon" type="image/png">
+    <link href="img/favicon.png" rel="icon" type="image/png">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     
@@ -11,7 +11,12 @@
     <script type="text/javascript" src="snake_ui.js"></script>
   </head>
   <body>
-    <h1>SNAKE</h1>
-    <pre id="snake"></pre>
+    <div class="game-container">
+      <h1 class='title'>ASCII Snake!</h1>
+      <h3 class='score'></h3>
+      <h3 class='high-score'></h3>
+      <pre id="snake"></pre>
+      <div class="messages"></div>
+    </div>
   </body>
 </html>
